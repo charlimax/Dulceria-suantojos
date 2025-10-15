@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Susantojos - Dulcería</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="LogoSusa.png">
+
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header-inner">
+      <img src="LogoSusa.png" alt="Logo Susantojos" class="logo-img">
+    </div>
+  </header>
+
+  <!-- MAIN - fondo con degradado y textura ligera -->
+  <main class="hero" role="main">
+    <div class="hero-inner">
+      <h1>Endulza tu día con Susantojos</h1>
+      <p class="lead">Chocolates, gomitas y dulces artesanales. Compra rápido desde tu celular.</p>
+
+      <div class="cta-row">
+        <button id="btnProducts" class="cta">Productos</button>
+        <button id="btnOrders" class="cta ghost">Pedidos</button>
+      </div>
+      
+    </div>
+  </main>
+
+  <!-- PRODUCTS MODAL -->
+  <div id="modalProducts" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close" data-close>&times;</button>
+      <h2>Productos</h2>
+      <div id="productsList" class="products-list">
+        <!-- productos inyectados por JS -->
+      </div>
+      <div class="modal-foot">
+        <button class="btn" data-close>Listo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ORDERS MODAL -->
+  <div id="modalOrders" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close" data-close>&times;</button>
+      <h2>Tu pedido</h2>
+
+      <div id="orderList" class="order-list">
+        <!-- items añadidos -->
+      </div>
+
+      <div class="order-total">Total: $<span id="orderTotal">0</span></div>
+
+      <h3>Datos de entrega</h3>
+      <input id="custName" placeholder="Nombre completo" />
+      <input id="custPhone" placeholder="Teléfono" />
+      <input id="custAddress" placeholder="Dirección (calle, barrio)" />
+      <select id="custPay">
+        <option>Nequi</option>
+        <option>Daviplata</option>
+        <option>Contraentrega</option>
+      </select>
+
+      <div class="modal-foot">
+        <button id="sendWhats" class="btn primary">Enviar por WhatsApp</button>
+        <button class="btn" data-close>Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+   <!-- FOOTER -->
+  <footer>
+    <div class="footer-top container">
+      <div class="footer-left">
+        <p><strong>Dirección</strong><br>Cl. 2 # 2-20, Cogua, Cundinamarca</p>
+        <p><strong>Tel:</strong> <a href="tel:+573184468410">+57 318 446 8410</a></p>
+        <p><strong>WhatsApp:</strong> <a href="https://wa.me/573184468410" target="_blank" rel="noopener">Enviar mensaje</a></p>
+        <button id="howGet" class="btn small">Cómo llegar</button>
+      </div>
+
+      <div class="footer-logo">
+        <img src="LogoSusa.png" alt="Logo Susantojos">
+      </div>
+
+      <div class="footer-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3974.280448145441!2d-73.9821692898724!3d5.058221994897297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e406e53a446eda3%3A0xdeb74a5010f94458!2sCl.%202%20%23%202-20%2C%20Cogua%2C%20Cundinamarca!5e0!3m2!1ses-419!2sco!4v1760279854120!5m2!1ses-419!2sco"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+
+    <div class="container center small">© <span id="year"></span> Susantojos</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
