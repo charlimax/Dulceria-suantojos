@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dulcería Susantojs</title>
+<title>Dulcería Susantojos</title>
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
   body{
     font-family:'Poppins',sans-serif;
     height:100vh;
-    background:url('https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    background:url('dulces.jpg') center/cover no-repeat;
     display:flex;flex-direction:column;align-items:center;justify-content:center;
     text-align:center;color:white;overflow:hidden;
   }
@@ -64,9 +64,8 @@
 <div class="overlay"></div>
 
 <div class="content">
-  <div class="logo">🍭 Dulcería Susantojos 🍬</div>
-
-  <div class="buttons">
+  <img src="dulces-removebg-preview.png" alt="Logo Dulcería Moderna" class="logo-img">
+<div class="buttons">
     <button id="pedidoBtn">Hacer pedido</button>
     <button onclick="window.open('https://maps.google.com?q=dulceria','_blank')">Cómo llegar</button>
   </div>
@@ -84,10 +83,10 @@
     <hr>
 
     <label>Dirección:</label>
-    <textarea id="direccion" placeholder="Ej: Calle 10 #5-20, Bogotá"></textarea>
+    <textarea id="direccion" placeholder="Calle 2 # 2 - 29, Cogua"></textarea>
 
     <label>Teléfono:</label>
-    <input type="tel" id="telefono" placeholder="Ej: 3001234567">
+    <input type="tel" id="telefono" placeholder="573184468410">
 
     <label>Forma de pago:</label>
     <select id="pago">
@@ -178,3 +177,4 @@
 
 </body>
 </html>
+
