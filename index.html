@@ -1,104 +1,180 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Susantojos - Dulcería</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/png" href="logoSusa.png">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dulcería Susantojs</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Poppins',sans-serif;
+    height:100vh;
+    background:url('https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;color:white;overflow:hidden;
+  }
+  .overlay{
+    position:absolute;inset:0;background:rgba(0,0,0,0.4);z-index:0;
+  }
+  .content{position:relative;z-index:1;}
+  .logo{
+    font-size:3rem;font-weight:700;text-shadow:3px 3px 12px rgba(0,0,0,0.6);margin-bottom:20px;
+  }
+  .buttons{display:flex;gap:20px;justify-content:center;}
+  button{
+    background-color:#fff;color:#222;border:none;padding:15px 30px;border-radius:12px;
+    cursor:pointer;font-size:1.1rem;font-weight:600;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);transition:all 0.3s;
+  }
+  button:hover{background-color:#ff4081;color:white;transform:translateY(-2px);}
+  
+  /* Modal */
+  .modal{
+    display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);
+    justify-content:center;align-items:center;z-index:10;
+  }
+  .modal-content{
+    background:white;color:#222;padding:25px;border-radius:15px;
+    width:90%;max-width:420px;height:90vh;display:flex;flex-direction:column;
+  }
+  .close{float:right;cursor:pointer;font-size:1.4rem;}
+  .modal-content h2{text-align:center;margin-bottom:10px;}
+  .scroll-area{
+    flex:1;overflow-y:auto;margin-top:10px;padding-right:5px;
+  }
+  .product{
+    display:flex;justify-content:space-between;align-items:center;
+    margin:6px 0;padding:8px 10px;background:#f9f9f9;border-radius:8px;
+    box-shadow:inset 0 0 4px rgba(0,0,0,0.05);
+  }
+  .product label{flex:1;font-weight:500;}
+  .product input{
+    width:60px;text-align:center;border:1px solid #ccc;
+    border-radius:6px;padding:4px;
+  }
+  .total{margin-top:10px;font-weight:bold;text-align:right;}
+  select,input,textarea{
+    width:100%;margin:6px 0;padding:8px;border:1px solid #ccc;border-radius:8px;
+  }
+  textarea{resize:none;height:60px;}
+</style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="header">
-    <div class="container header-inner">
-      <img src="logoSusa.png" alt="Logo Susantojos" class="logo-img">
-    </div>
-  </header>
+<div class="overlay"></div>
 
-  <!-- MAIN - fondo con degradado y textura ligera -->
-  <main class="hero" role="main">
-    <div class="hero-inner">
-      <h1>Endulza tu día con Susantojos</h1>
-      <p class="lead">Chocolates, gomitas y dulces artesanales. Compra rápido desde tu celular.</p>
+<div class="content">
+  <div class="logo">🍭 Dulcería Susantojos 🍬</div>
 
-      <div class="cta-row">
-        <button id="btnProducts" class="cta">Productos</button>
-        <button id="btnOrders" class="cta ghost">Pedidos</button>
-      </div>
-      
-    </div>
-  </main>
-
-  <!-- PRODUCTS MODAL -->
-  <div id="modalProducts" class="modal" aria-hidden="true">
-    <div class="modal-content">
-      <button class="close" data-close>&times;</button>
-      <h2>Productos</h2>
-      <div id="productsList" class="products-list">
-        <!-- productos inyectados por JS -->
-      </div>
-      <div class="modal-foot">
-        <button class="btn" data-close>Listo</button>
-      </div>
-    </div>
+  <div class="buttons">
+    <button id="pedidoBtn">Hacer pedido</button>
+    <button onclick="window.open('https://maps.google.com?q=dulceria','_blank')">Cómo llegar</button>
   </div>
+</div>
 
-  <!-- ORDERS MODAL -->
-  <div id="modalOrders" class="modal" aria-hidden="true">
-    <div class="modal-content">
-      <button class="close" data-close>&times;</button>
-      <h2>Tu pedido</h2>
+<!-- Modal -->
+<div class="modal" id="pedidoModal">
+  <div class="modal-content">
+    <span class="close" id="cerrarModal">&times;</span>
+    <h2>Selecciona tus productos</h2>
 
-      <div id="orderList" class="order-list">
-        <!-- items añadidos -->
-      </div>
+    <div class="scroll-area" id="productosContainer"></div>
 
-      <div class="order-total">Total: $<span id="orderTotal">0</span></div>
+    <div class="total">Total: $<span id="total">0</span></div>
+    <hr>
 
-      <h3>Datos de entrega</h3>
-      <input id="custName" placeholder="Nombre completo" />
-      <input id="custPhone" placeholder="Teléfono" />
-      <input id="custAddress" placeholder="Dirección (calle, barrio)" />
-      <select id="custPay">
-        <option>Nequi</option>
-        <option>Daviplata</option>
-        <option>Contraentrega</option>
-      </select>
+    <label>Dirección:</label>
+    <textarea id="direccion" placeholder="Ej: Calle 10 #5-20, Bogotá"></textarea>
 
-      <div class="modal-foot">
-        <button id="sendWhats" class="btn primary">Enviar por WhatsApp</button>
-        <button class="btn" data-close>Cancelar</button>
-      </div>
-    </div>
+    <label>Teléfono:</label>
+    <input type="tel" id="telefono" placeholder="Ej: 3001234567">
+
+    <label>Forma de pago:</label>
+    <select id="pago">
+      <option value="Nequi">Nequi</option>
+      <option value="Daviplata">Daviplata</option>
+      <option value="Contra entrega">Contra entrega</option>
+    </select>
+
+    <button id="enviarPedido">Enviar pedido</button>
   </div>
+</div>
 
-   <!-- FOOTER -->
-  <footer>
-    <div class="footer-top container">
-      <div class="footer-left">
-        <p><strong>Dirección</strong><br>Cl. 2 # 2-20, Cogua, Cundinamarca</p>
-        <p><strong>Tel:</strong> <a href="tel:+573184468410">+57 318 446 8410</a></p>
-        <p><strong>WhatsApp:</strong> <a href="https://wa.me/573184468410" target="_blank" rel="noopener">Enviar mensaje</a></p>
-        <button id="howGet" class="btn small">Cómo llegar</button>
-      </div>
+<script>
+  const productos = [
+    {nombre:'Bombón', precio:1500},
+    {nombre:'Caramelo', precio:800},
+    {nombre:'Chicle', precio:2000},
+    {nombre:'Chocolatina', precio:500},
+    {nombre:'Galleta', precio:1000},
+    {nombre:'Gomitas', precio:1000},
+    {nombre:'Malvavisco', precio:1200},
+    {nombre:'Paleta', precio:1200},
+    {nombre:'Pirulí', precio:1800},
+    {nombre:'Turrón', precio:2500},
+    {nombre:'Maní dulce', precio:700},
+    {nombre:'Masmelos mini', precio:900},
+    {nombre:'Chocobolas', precio:1500},
+    {nombre:'Rositas de maíz', precio:1200},
+    {nombre:'Nubes', precio:1300},
+  ].sort((a,b)=>a.nombre.localeCompare(b.nombre));
 
-      <div class="footer-logo">
-        <img src="logoSusa.png" alt="Logo Susantojos">
-      </div>
+  const pedidoBtn=document.getElementById('pedidoBtn');
+  const modal=document.getElementById('pedidoModal');
+  const cerrarModal=document.getElementById('cerrarModal');
+  const productosContainer=document.getElementById('productosContainer');
+  const totalEl=document.getElementById('total');
+  const enviarPedido=document.getElementById('enviarPedido');
 
-      <div class="footer-map">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3974.280448145441!2d-73.9821692898724!3d5.058221994897297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e406e53a446eda3%3A0xdeb74a5010f94458!2sCl.%202%20%23%202-20%2C%20Cogua%2C%20Cundinamarca!5e0!3m2!1ses-419!2sco!4v1760279854120!5m2!1ses-419!2sco"
-          loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-    </div>
+  pedidoBtn.onclick=()=>modal.style.display='flex';
+  cerrarModal.onclick=()=>modal.style.display='none';
+  window.onclick=(e)=>{if(e.target===modal)modal.style.display='none';};
 
-    <div class="container center small">© <span id="year"></span> Susantojos</div>
-  </footer>
+  productos.forEach((p,i)=>{
+    const div=document.createElement('div');
+    div.classList.add('product');
+    div.innerHTML=`
+      <label>${p.nombre} - $${p.precio}</label>
+      <input type="number" min="0" value="0" id="prod${i}">
+    `;
+    productosContainer.appendChild(div);
+  });
 
-  <script src="script.js"></script>
+  function calcularTotal(){
+    let total=0;
+    productos.forEach((p,i)=>{
+      const cantidad=parseInt(document.getElementById(`prod${i}`).value)||0;
+      total+=p.precio*cantidad;
+    });
+    totalEl.textContent=total;
+  }
+
+  productosContainer.addEventListener('input',calcularTotal);
+
+  enviarPedido.onclick=()=>{
+    const direccion=document.getElementById('direccion').value.trim();
+    const telefono=document.getElementById('telefono').value.trim();
+    const pago=document.getElementById('pago').value;
+
+    if(!direccion||!telefono){alert('Completa dirección y teléfono');return;}
+
+    let mensaje='Pedido Dulcería Moderna:\n';
+    let total=0;
+    productos.forEach((p,i)=>{
+      const cantidad=parseInt(document.getElementById(`prod${i}`).value)||0;
+      if(cantidad>0){
+        mensaje+=`- ${p.nombre} x${cantidad} = $${p.precio*cantidad}\n`;
+        total+=p.precio*cantidad;
+      }
+    });
+    if(total===0){alert('Selecciona al menos un producto');return;}
+    mensaje+=`\nTotal: $${total}\nDirección: ${direccion}\nTeléfono: ${telefono}\nPago: ${pago}`;
+
+    const numero='573001234567'; // ← Cambia este número
+    const url=`https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+    window.open(url,'_blank');
+  };
+</script>
+
 </body>
 </html>
-
