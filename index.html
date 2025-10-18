@@ -1,240 +1,118 @@
+<!-- INDEX -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Susantojos Dulcería</title>
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-body {
-  font-family: "Poppins", sans-serif;
-  background: url("imagendeFondodulces.jpg") center center / cover no-repeat fixed;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  position: relative;
-}
-.overlay {
-    background-color: rgba(0,0,0,0.55);
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-
-  .content {
-    position: relative;
-    z-index: 1;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-  }
-
-  .logo-img {
-    width: clamp(220px, 55vw, 480px);
-    height: auto;
-    filter: drop-shadow(0 0 10px rgba(0,0,0,0.4));
-  }
-
-  .btn {
-    padding: 12px 25px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    font-weight: 600;
-    transition: all 0.3s;
-  }
-
-  .btn-pedidos {
-    background-color: #ff5eb0;
-    color: #fff;
-  }
-  .btn-pedidos:hover {
-    background-color: #ff3199;
-  }
-  .btn-ubicacion {
-    background-color: #ffd93d;
-    color: #333;
-  }
-  .btn-ubicacion:hover {
-    background-color: #ffcc00;
-  }
-
-  /* Modal */
-  .modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0,0,0,0.6);
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
-  }
-
-  .modal-content {
-    background-color: #fff;
-    border-radius: 15px;
-    padding: 20px;
-    max-width: 420px;
-    width: 90%;
-    max-height: 80vh;
-    overflow-y: auto;
-  }
-
-  .modal-content h2 {
-    text-align: center;
-    margin-bottom: 15px;
-  }
-
-  .producto {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 8px 0;
-  }
-
-  .producto input {
-    width: 60px;
-    padding: 4px;
-  }
-
-  .total {
-    font-weight: bold;
-    margin-top: 10px;
-    text-align: right;
-  }
-
-  .form-section input, .form-section select {
-    width: 100%;
-    padding: 8px;
-    margin: 6px 0;
-  }
-
-  .enviar-btn {
-    background-color: #ff5eb0;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    width: 100%;
-    font-size: 1rem;
-    margin-top: 10px;
-    cursor: pointer;
-  }
-
-  .enviar-btn:hover {
-    background-color: #ff3199;
-  }
-
-  @media (max-width: 480px) {
-    .modal-content { padding: 15px; }
-    .producto input { width: 50px; }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulcería Susantojos</title>
+  <!-- Vinculación del CSS -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="overlay"></div>
-  <div class="content">
-    <img src="logoSusa.png" alt="Logo Dulcería Moderna" class="logo-img">
-    <button class="btn btn-pedidos" id="btnPedidos">🛍️ Hacer Pedido</button>
-    <button class="btn btn-ubicacion" onclick="window.open('https://maps.app.goo.gl/tr279tywUyR5MvVz7','_blank')">
-  📍 Cómo llegar
-</button>
 
+  <!-- POPUP DE BIENVENIDA -->
+  <div id="popup" class="popup">
+    <!-- Imagen del popup (reemplaza por otra si deseas) -->
+    <img src="imagendeFondodulces.jpg" alt="Bienvenida Dulcería Susantojos">
   </div>
 
-  <div class="modal" id="modalPedidos">
-    <div class="modal-content">
-      <h2>Selecciona tus productos</h2>
-      <div id="listaProductos"></div>
-      <p class="total">Total: $<span id="total">0</span></p>
+  <!-- ENCABEZADO CON LOGO -->
+  <header>
+    <img src="logoSusa.png" alt="Logo Dulcería Susantojos" class="logo bounce">
+  </header>
 
-      <div class="form-section">
-        <input type="text" id="direccion" placeholder="Dirección" required>
-        <input type="text" id="telefono" placeholder="Teléfono" required>
-        <select id="pago">
-          <option value="">Forma de pago</option>
-          <option value="Nequi">Nequi</option>
-          <option value="Daviplata">Daviplata</option>
-          <option value="Contra Entrega">Contra Entrega</option>
-        </select>
+  <!-- SECCIÓN PRINCIPAL -->
+  <main>
+    <h1>Bienvenido a Dulcería Susantojos</h1>
+    <p>Endulza tus momentos con nuestros productos</p>
+
+    <!-- GRID DE CATEGORÍAS -->
+    <section class="grid">
+      <!-- Tarjeta 1 -->
+      <div class="card">
+        <img src="https://via.placeholder.com/300x200" alt="Dulces">
+        <h3>Dulces</h3>
+        <p>Los más tradicionales y deliciosos.</p>
       </div>
 
-      <button class="enviar-btn" id="enviarPedido">Enviar Pedido</button>
-    </div>
-  </div>
+      <!-- Tarjeta 2 -->
+      <div class="card">
+        <img src="https://via.placeholder.com/300x200" alt="Chocolates">
+        <h3>Chocolates</h3>
+        <p>Una tentación para cualquier ocasión.</p>
+      </div>
 
-  <script>
-    const productos = [
-      { nombre: "Bombones", precio: 2500 },
-      { nombre: "Chicles", precio: 1000 },
-      { nombre: "Chocolate", precio: 3500 },
-      { nombre: "Gomitas", precio: 2000 },
-      { nombre: "Malvaviscos", precio: 1800 },
-      { nombre: "Paletas", precio: 1500 },
-      { nombre: "Turrones", precio: 3000 },
-    ].sort((a,b)=>a.nombre.localeCompare(b.nombre));
+      <!-- Tarjeta 3 -->
+      <div class="card">
+        <img src="https://via.placeholder.com/300x200" alt="Gomitas">
+        <h3>Gomitas</h3>
+        <p>Colores, sabores y diversión.</p>
+      </div>
 
-    const lista = document.getElementById("listaProductos");
-    const totalSpan = document.getElementById("total");
+      <!-- Tarjeta 4 -->
+      <div class="card">
+        <img src="https://via.placeholder.com/300x200" alt="Bebidas">
+        <h3>Bebidas</h3>
+        <p>Refresca tu día con algo dulce.</p>
+      </div>
 
-    productos.forEach(p => {
-      const div = document.createElement("div");
-      div.className = "producto";
-      div.innerHTML = `
-        <span>${p.nombre} - $${p.precio}</span>
-        <input type="number" min="0" value="0" data-precio="${p.precio}">
-      `;
-      lista.appendChild(div);
-    });
+      <!-- Tarjeta 5 -->
+      <div class="card">
+        <img src="https://via.placeholder.com/300x200" alt="Regalos">
+        <h3>Regalos</h3>
+        <p>Detalles dulces para personas especiales.</p>
+      </div>
 
-    lista.addEventListener("input", () => {
-      let total = 0;
-      lista.querySelectorAll("input").forEach(input => {
-        total += parseInt(input.value || 0) * parseInt(input.dataset.precio);
-      });
-      totalSpan.textContent = total;
-    });
+      <!-- Tarjeta 6 -->
+      <div class="card">
+        <img src="https://via.placeholder.com/300x200" alt="Cajas Especiales">
+        <h3>Cajas Especiales</h3>
+        <p>Combos llenos de amor y sabor.</p>
+      </div>
+    </section>
 
-    const modal = document.getElementById("modalPedidos");
-    document.getElementById("btnPedidos").onclick = ()=> modal.style.display="flex";
-    window.onclick = e => { if(e.target === modal) modal.style.display="none"; };
+    <!-- TARJETA DE PEDIDO -->
+    <section class="pedido">
+      <h2>Haz tu pedido</h2>
 
-    document.getElementById("enviarPedido").onclick = () => {
-      const direccion = document.getElementById("direccion").value.trim();
-      const telefono = document.getElementById("telefono").value.trim();
-      const pago = document.getElementById("pago").value;
-      if(!direccion || !telefono || !pago){ alert("Por favor completa todos los campos"); return; }
+      <form id="pedidoForm">
+        <!-- Selección de producto -->
+        <label for="producto">Selecciona un producto:</label>
+        <select id="producto" required>
+          <option value="">-- Selecciona --</option>
+          <option value="Dulces">Dulces</option>
+          <option value="Chocolates">Chocolates</option>
+          <option value="Gomitas">Gomitas</option>
+          <option value="Bebidas">Bebidas</option>
+          <option value="Regalos">Regalos</option>
+          <option value="Cajas Especiales">Cajas Especiales</option>
+        </select>
 
-      let mensaje = "🛍️ *Nuevo Pedido Dulcería Moderna*%0A";
-      lista.querySelectorAll("input").forEach((input,i)=>{
-        const cant = parseInt(input.value);
-        if(cant>0) mensaje += `• ${productos[i].nombre}: ${cant} x $${productos[i].precio}%0A`;
-      });
-      mensaje += `%0A*Total:* $${totalSpan.textContent}%0A📍 *Dirección:* ${direccion}%0A📞 *Teléfono:* ${telefono}%0A💳 *Pago:* ${pago}`;
-      const url = `https://wa.me/573184468410?text=${mensaje}`;
-      window.open(url, "_blank");
-    };
-  </script>
+        <!-- Datos personales -->
+        <input type="text" id="nombre" placeholder="Tu nombre" required>
+        <input type="text" id="telefono" placeholder="Tu teléfono" required>
+        <input type="text" id="direccion" placeholder="Dirección de entrega" required>
+
+        <!-- Forma de pago -->
+        <label for="pago">Forma de pago:</label>
+        <select id="pago" required>
+          <option value="">-- Selecciona --</option>
+          <option value="Nequi">Nequi</option>
+          <option value="Daviplata">Daviplata</option>
+          <option value="Contra entrega">Contra entrega</option>
+        </select>
+
+        <button type="submit" class="btn-enviar">Enviar pedido</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- BOTÓN FLOTANTE WHATSAPP -->
+  <a href="https://wa.me/573023178030" class="whatsapp-float" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  </a>
+
+  <!-- Vinculación del JavaScript -->
+  <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
