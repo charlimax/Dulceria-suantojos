@@ -10,18 +10,18 @@
     padding: 0;
     box-sizing: border-box;
   }
-  body {
-    font-family: "Poppins", sans-serif;
-    background: url("imagendeFondodulces.jpg") center/cover no-repeat;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .overlay {
+body {
+  font-family: "Poppins", sans-serif;
+  background: url("imagendeFondodulces.jpg") center center / cover no-repeat fixed;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+}
+.overlay {
     background-color: rgba(0,0,0,0.55);
     position: absolute;
     inset: 0;
@@ -227,6 +227,7 @@
   </script>
 </body>
 </html>
+
 
 
 
