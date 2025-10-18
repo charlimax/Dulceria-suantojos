@@ -31,6 +31,7 @@ document.getElementById('pedidoForm').addEventListener('submit', function(e) {
   📍 Dirección: ${direccion}
   💳 Forma de pago: ${pago}`;
 
-  const url = `https://wa.me/573023178030?text=${encodeURIComponent(mensaje)}`;
+  const url = `https://wa.me/573184468410?text=${encodeURIComponent(mensaje)}`;
   window.open(url, '_blank');
 });
+
