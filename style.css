@@ -128,6 +128,28 @@ input, select {
   height: 60px;
 }
 
+/* --- BOTÓN FLOTANTE GOOGLE MAPS --- */
+.maps-float {
+  position: fixed;
+  bottom: 100px;      /* lo ubica encima del botón de WhatsApp */
+  right: 20px;
+  z-index: 999;
+}
+
+.maps-float img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: transform 0.2s;
+}
+
+.maps-float img:hover {
+  transform: scale(1.1);
+}
+
+
+
 /* --- RESPONSIVE --- */
 @media (max-width: 600px) {
   .grid {
@@ -138,3 +160,4 @@ input, select {
     margin: 20px;
   }
 }
+
